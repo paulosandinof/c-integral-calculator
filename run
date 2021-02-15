@@ -1,0 +1,2 @@
+gcc main.c -lm -pthread
+./a.out 20 20
