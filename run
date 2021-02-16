@@ -1,2 +1,0 @@
-gcc main.c -lm -pthread
-./a.out 2 3

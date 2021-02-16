@@ -9,10 +9,9 @@ double b = 5;
 int number_of_trapezoids;
 int number_of_threads;
 
-int is_non_integer_division = 0;
 double *thread_return_array;
 
-double f1(double x);
+double f(double x);
 
 void *calculate_area(void *params)
 {
@@ -24,17 +23,23 @@ void *calculate_area(void *params)
     double local_a = a + (thread_number * trapezoids_per_thread * height);
     double local_b = local_a + trapezoids_per_thread * height;
 
+    if ((thread_number == (number_of_threads - 1)) && ((number_of_trapezoids % number_of_threads) != 0))
+    {
+        trapezoids_per_thread += number_of_trapezoids % number_of_threads;
+        local_b = b;
+    }
+
     printf("Thread %i local a: %f \n", thread_number, local_a);
     printf("Thread %i local b: %f \n", thread_number, local_b);
 
     printf("Trapézios na thread: %i \n", trapezoids_per_thread);
 
-    double total_area = (f1(local_a) + f1(local_b)) / 2;
+    double total_area = (f(local_a) + f(local_b)) / 2;
 
     for (int i = 1; i < trapezoids_per_thread; i++)
     {
         double x_i = local_a + i * height;
-        total_area += f1(x_i);
+        total_area += f(x_i);
     }
 
     total_area = height * total_area;
@@ -62,7 +67,6 @@ int main(int argc, char *argv[])
     int status;
     void *thread_return;
 
-    is_non_integer_division = number_of_trapezoids % number_of_threads;
     thread_return_array = malloc(sizeof(double) * number_of_threads);
 
     for (int i = 0; i < number_of_threads; i++)
@@ -75,7 +79,6 @@ int main(int argc, char *argv[])
             printf("Erro na criação da thread. Codigo de erro: %i \n", status);
             return 1;
         }
-        sleep(0.5);
     }
 
     for (int i = 0; i < number_of_threads; i++)
@@ -95,14 +98,15 @@ int main(int argc, char *argv[])
         sum_of_areas += thread_return_array[i];
     }
 
-    printf("Area da funcao: %.26f \n", sum_of_areas);
+    printf("Area da funcao: %.2e \n", sum_of_areas);
 
     free(thread_return_array);
 
     return 0;
 }
 
-double f1(double x)
+double f(double x)
 {
-    return log10(x);
+    // return log10(x);
+    return log(x);
 }
