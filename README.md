@@ -13,17 +13,13 @@ Resultados de testes com algumas funções:
 - f1: 
     - f(x) = log(x); 
     - a = 1;
-    - b = 5;
-    - real result: 1.7577
-    - result by trapezoidal rule with 7 trapezoids: 1.74833577215
-    - result by trapezoidal rule with 15 trapezoids: 1.75561915023
-    - result by trapezoidal rule with 20 trapezoids: 1.75651586878
+    - b = 10;
+    - real result: 6.0913
+    - result by trapezoidal rule with 120 trapezoids: 6.091166
 
 - f2:
     - f(x) = ln(x); 
     - a = 1;
-    - b = 5;
-    - real result: 4.0472
-    - result by trapezoidal rule with 7 trapezoids: 4.02569188650
-    - result by trapezoidal rule with 15 trapezoids: 4.04246248429
-    - result by trapezoidal rule with 20 trapezoids: 4.04452725506
+    - b = 10;
+    - real result: 14.026
+    - result by trapezoidal rule with 200 trapezoids: 14.025699

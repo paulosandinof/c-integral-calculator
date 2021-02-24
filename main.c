@@ -4,8 +4,8 @@
 #include <pthread.h>
 #include <unistd.h>
 
-double a = 1;
-double b = 5;
+double a = 1.0;
+double b = 10.0;
 int number_of_trapezoids;
 int number_of_threads;
 
@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
         sum_of_areas += thread_return_array[i];
     }
 
-    printf("Area da funcao: %.2e \n", sum_of_areas);
+    printf("Area da funcao: %f \n", sum_of_areas);
 
     free(thread_return_array);
 
@@ -109,4 +109,6 @@ double f(double x)
 {
     // return log10(x);
     return log(x);
+    // return 5.0;
+    // return sin(2.0 * x) + cos(5.0 * x);
 }
